@@ -5,6 +5,9 @@
 #define CONECCTION_H
 class WiFiConnection : public ESP8266WiFiClass
 {
+private:
+    bool DHCP = false;
+
 public:
     char *ssid;
     char *password;
@@ -23,6 +26,13 @@ public:
         dns = IPAddress(8, 8, 8, 8);
         connectionLastAttempt = 0;
     }
+    WiFiConnection(char *ssid_, char *password_)
+    {
+        ssid = ssid_;
+        password = password_;
+        DHCP = true;
+        connectionLastAttempt = 0;
+    }
     bool connect()
     {
         bool result = false;
@@ -34,7 +44,8 @@ public:
         // conecta con la red wifi
         Serial.print("Connecting to ");
         Serial.println(ssid);
-        WiFi.config(ip, dns, gateway, subnet);
+        if (!DHCP)
+            WiFi.config(ip, dns, gateway, subnet);
         WiFi.begin(ssid, password);
         int attemps = 0;
         while (WiFi.status() != WL_CONNECTED && attemps < 20) // intenta por 10 segundos si no sale
