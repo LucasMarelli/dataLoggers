@@ -76,7 +76,7 @@ public:
         {
             if (connectionLastAttempt == 0) // esto me indica que es la primera vez que entra. Entonces indico que se detectó pérdida de conexión
             {
-                Serial.println("\nConnection lost!");
+                Serial.println("Connection lost!");
             }
             bool result = WiFiConnection::connect();
             connectionLastAttempt = millis();
