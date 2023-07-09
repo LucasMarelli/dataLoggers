@@ -1,6 +1,5 @@
 #include <Arduino.h>
 #include <ESP8266WiFi.h>
-#include <ESP8266WebServer.h>
 #ifndef CONECCTION_H
 #define CONECCTION_H
 class WiFiConnection : public ESP8266WiFiClass
